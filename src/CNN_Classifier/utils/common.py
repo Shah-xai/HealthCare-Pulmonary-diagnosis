@@ -6,6 +6,7 @@ from ensure import ensure_annotations
 from typing import Any
 import joblib, json
 import base64
+import zipfile
 
 # Define a function to read YAML files and return a ConfigBox object
 @ensure_annotations
@@ -24,8 +25,7 @@ def read_yaml(path_to_yaml: str) -> ConfigBox:
     except Exception as e:
         raise ValueError(f"Error reading YAML file: {e}")
 # Define a function to create directories if they don't exist
-@ensure_annotations
-def create_directories(path_to_directories: list) -> None:
+def create_directories(path_to_directories: list[str]) -> None:
     """
     Creates directories if they do not exist.
 
@@ -33,6 +33,7 @@ def create_directories(path_to_directories: list) -> None:
         path_to_directories (list): A list of directory paths to create."""
     for path in path_to_directories:
         os.makedirs(path, exist_ok=True)
+
 # Define a function to save a Python object as a JSON file
 @ensure_annotations
 def save_json(path: str, data: Any) -> None:
@@ -73,6 +74,18 @@ def load_object(path: str) -> Any:
     Args:
         path (str): The file path to the object file."""
     return joblib.load(path)
+# Define a function to extract a zip file to a specified directory
+@ensure_annotations
+def extract_zip(file_path: str, dest_dir: str) -> None:
+    """
+    Extracts a zip file to a specified directory.
+
+    Args:
+        file_path (str): The file path to the zip file.
+        dest_dir (str): The directory where the contents of the zip file will be extracted."""
+    
+    with zipfile.ZipFile(file_path, 'r') as zip_ref:
+        zip_ref.extractall(dest_dir)
 
 # Define a function to get the size of a file in KB
 @ensure_annotations
@@ -93,6 +106,7 @@ def encodeImageToBase64(image_path: str) -> str:
         image_path (str): The file path to the image."""
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
+
     
     
 def decodeBase64ToImage(base64_string: str, output_path: str) -> None:
