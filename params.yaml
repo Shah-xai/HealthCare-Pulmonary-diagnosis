@@ -1,1 +1,9 @@
-key: value
+include_top: False
+input_shape: [224, 224, 3] # musth have size in RESNET50
+weights: imagenet
+pooling: avg
+classes: 4
+classifier_activation: softmax
+EPOCHS: 20
+LEARNING_RATE: 0.001
+BATCH_SIZE: 32
