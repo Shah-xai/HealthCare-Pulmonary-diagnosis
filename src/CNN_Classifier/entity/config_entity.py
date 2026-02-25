@@ -13,7 +13,6 @@ class BaseModelConfig:
     base_model_path: Path
     updated_base_model_path: Path
     feature_extract_dir: Path
-    params_image_size: list
     params_include_top: bool
     params_weights: str
     params_classes: int

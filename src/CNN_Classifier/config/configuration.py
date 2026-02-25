@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from CNN_Classifier.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from CNN_Classifier.utils.common import read_yaml,create_directories
 from CNN_Classifier.entity.config_entity import DataIngestionConfig, BaseModelConfig
@@ -23,10 +25,9 @@ class ConfigurationManager:
         create_directories([config.root_dir])
         base_model_config = BaseModelConfig(
             root_dir=config.root_dir,
-            base_model_path=config.base_model_dir,
-            updated_base_model_path=config.updated_model_dir,
-            feature_extract_dir=config.feature_extract_dir,
-            params_image_size=params.IMAGE_SIZE,
+            base_model_path=Path(config.base_model_dir),
+            updated_base_model_path=Path(config.updated_model_dir),
+            feature_extract_dir=Path(config.feature_extract_dir),
             params_learning_rate=params.LEARNING_RATE,
             params_include_top=params.INCLUDE_TOP,
             params_weights=params.WEIGHTS,

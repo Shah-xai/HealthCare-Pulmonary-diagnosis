@@ -29,8 +29,9 @@ class BaseModelPreparation:
     @staticmethod
     def _prepare_transfer_learning_model(base_model_path: str,
                                      updated_base_model_path: str,
-                                     params_learning_rate: float, num_classes: int, classifier_activation: str,
-                                       freez_all=True,freez_to=None):
+                                     params_learning_rate: float, 
+                                     num_classes: int, classifier_activation: str,
+                                     freez_all=True,freez_to=None):
         
         if  Path(updated_base_model_path).exists():
             logger.info(f"Updated base model already exists at {updated_base_model_path}. Loading the model...")
@@ -55,6 +56,7 @@ class BaseModelPreparation:
         updated_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=params_learning_rate),
                             loss='categorical_crossentropy',
                             metrics=['accuracy'])
+        print("Transfer learning model prepared with the following architecture:")
         updated_model.summary()
         return updated_model
     
@@ -69,7 +71,7 @@ class BaseModelPreparation:
         if freez_all:
             for layer in base_model.layers:
                 layer.trainable = False
-            x = base_model.output
+        x = base_model.output
 
     # Force a consistent 2D embedding output for any saved base model configuration
         if len(x.shape) == 4:  # (batch, H, W, C)
