@@ -2,7 +2,7 @@ from pathlib import Path
 
 from CNN_Classifier.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from CNN_Classifier.utils.common import read_yaml,create_directories
-from CNN_Classifier.entity.config_entity import DataIngestionConfig, BaseModelConfig
+from CNN_Classifier.entity.config_entity import DataIngestionConfig, BaseModelConfig, DataTransformationConfig
 
 class ConfigurationManager:
     def __init__(self, config_file_path=CONFIG_FILE_PATH, params_file_path=PARAMS_FILE_PATH):
@@ -37,3 +37,14 @@ class ConfigurationManager:
             params_pooling=params.POOLING
         )
         return base_model_config
+    def get_data_transformation_config(self)->DataTransformationConfig:
+        config = self.config.data_transformation
+        params = self.params
+        create_directories([config.root_dir])
+        data_transformation_config = DataTransformationConfig(
+            raw_data_dir=config.raw_data_dir,
+            root_dir=config.root_dir,
+            target_size=tuple(params.TARGET_IMAGE_SIZE),
+            seed=params.SEED
+        )
+        return data_transformation_config

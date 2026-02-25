@@ -5,7 +5,10 @@ data_ingestion:
   local_data_file: artifacts/data_ingestion/raw_data
 base_model_preparation:
   root_dir: artifacts/base_model
-  base_model_dir: artifacts/base_model/base_model.h5
-  updated_model_dir: artifacts/base_model/updated_model.h5
-  feature_extract_dir: artifacts/base_model/feature_extract_model.h5
+  base_model_dir: artifacts/base_model/base_model.keras
+  updated_model_dir: artifacts/base_model/updated_model.keras
+  feature_extract_dir: artifacts/base_model/feature_extract_model.keras
 
+data_transformation:
+  raw_data_dir: artifacts/data_ingestion/raw_data/Data
+  root_dir: artifacts/data_transformation

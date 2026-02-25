@@ -21,3 +21,9 @@ class BaseModelConfig:
     params_classifier_activation: str
     params_pooling: str
 
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    raw_data_dir: Path
+    root_dir: Path
+    target_size: tuple
+    seed: int
