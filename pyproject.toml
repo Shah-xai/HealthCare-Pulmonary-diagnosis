@@ -20,9 +20,12 @@ dependencies = [
     "pymongo[srv]==3.12",
     "python-box>=7.3.3",
     "pyyaml>=6.0.3",
+    "scikit-learn>=1.8.0",
     "scipy>=1.17.0",
     "seaborn>=0.13.2",
     "tensorflow>=2.20.0",
     "tqdm>=4.67.3",
     "types-pyyaml>=6.0.12.20250915",
+    "umap-learn>=0.5.11",
+    "xgboost>=3.2.0",
 ]

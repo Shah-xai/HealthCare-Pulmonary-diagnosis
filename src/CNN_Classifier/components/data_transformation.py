@@ -1,5 +1,5 @@
 from CNN_Classifier import logger   
-from CNN_Classifier.config.configuration import DataTransformationConfig
+from CNN_Classifier.entity.config_entity import DataTransformationConfig
 from PIL import Image
 from pathlib import Path
 

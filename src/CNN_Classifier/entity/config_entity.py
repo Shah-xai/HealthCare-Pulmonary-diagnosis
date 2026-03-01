@@ -27,3 +27,20 @@ class DataTransformationConfig:
     root_dir: Path
     target_size: tuple
     seed: int
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    training_data_dir: Path
+    validation_data_dir: Path
+    updated_model_dir: Path
+    feature_extract_dir: Path
+    trained_model_dir: Path
+    trained_model_dir_svm: Path
+    trained_model_dir_pca_svm: Path
+    trained_model_dir_kpca_svm: Path
+    SEED: int
+    EPOCHS: int
+    PATIENCE: int
+    IMAGE_SIZE: tuple
+    BATCH_SIZE: int

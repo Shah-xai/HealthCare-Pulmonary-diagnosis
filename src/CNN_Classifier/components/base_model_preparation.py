@@ -11,7 +11,7 @@ class BaseModelPreparation:
         logger.info("Preparing the base model ....")
         if not self.config.base_model_path.exists():
             logger.info(f"Base model not found at {self.config.base_model_path}. Downloading...")
-            base_model = tf.keras.applications.ResNet50V2(
+            base_model = tf.keras.applications.EfficientNetB1(
                 include_top=self.config.params_include_top,
                 weights=self.config.params_weights,
                 input_shape=self.config.params_input_shape,
@@ -49,20 +49,20 @@ class BaseModelPreparation:
             logger.warning("Invalid freez_to value. No layers will be frozen.")
     # Example of adding a new classification head
         x = base_model.output
-        x=tf.keras.layers.Dense(1024, activation='relu')(x)
+        x=tf.keras.layers.Dense(512, activation='relu')(x)
         predictions = tf.keras.layers.Dense(num_classes, activation=classifier_activation)(x)
         updated_model = tf.keras.Model(inputs=base_model.input, outputs=predictions)
     # Compile the updated model with the specified learning rate
         updated_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=params_learning_rate),
                             loss='categorical_crossentropy',
-                            metrics=['accuracy'])
+                            metrics=['f1_score'])
         print("Transfer learning model prepared with the following architecture:")
         updated_model.summary()
         return updated_model
     
     # Prepare the feature extractor for hybrid learning
     @staticmethod
-    def _prepare_feature_extractor(base_model_path: str, feature_extractor_path: str,params_learning_rate: float,pooling: str="avg", freez_all=True):
+    def _prepare_feature_extractor(base_model_path: str, feature_extractor_path: str,pooling: str="avg", freez_all=True):
         if Path(feature_extractor_path).exists():
             logger.info(f"Feature extractor already exists at {feature_extractor_path}. Loading the model...")
             return tf.keras.models.load_model(feature_extractor_path)
@@ -86,9 +86,7 @@ class BaseModelPreparation:
             raise ValueError(f"Unexpected base model output rank {len(x.shape)} with shape {x.shape}")
 
         feature_extractor = tf.keras.Model(inputs=base_model.input, outputs=x, name="feature_extractor")
-        feature_extractor.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=params_learning_rate),
-                            loss='categorical_crossentropy',
-                            metrics=['accuracy'])
+     
         print("Feature extractor prepared with the following architecture:")
         feature_extractor.summary()
    
@@ -113,7 +111,6 @@ class BaseModelPreparation:
         feature_extractor = self._prepare_feature_extractor(
             base_model_path=str(self.config.base_model_path),
             feature_extractor_path=str(self.config.feature_extract_dir),
-            params_learning_rate=self.config.params_learning_rate,
             pooling=self.config.params_pooling,
             freez_all=True
         )

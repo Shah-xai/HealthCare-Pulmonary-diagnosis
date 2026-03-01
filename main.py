@@ -2,6 +2,7 @@ from CNN_Classifier import logger
 from CNN_Classifier.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from CNN_Classifier.pipeline.base_model_preparation_pipeline import BaseModelPreparationPipeline
 from CNN_Classifier.pipeline.data_transformation_pipeline import DataTransformationPipeline
+from CNN_Classifier.pipeline.model_training_pipeline import ModelTrainingPipeline
 
 # logger.info("Starting the CNN Classifier application...")
 
@@ -13,17 +14,26 @@ from CNN_Classifier.pipeline.data_transformation_pipeline import DataTransformat
 # except Exception as e:
 #     logger.error(f"Data ingestion failed: {e}")
 # # Data transformation
-logger.info("Transforming data...")
-try:
-    data_transformation_pipeline = DataTransformationPipeline()
-    data_transformation_pipeline.initiate_data_transformation()
-except Exception as e:
-    logger.error(f"Data transformation failed: {e}")
+# logger.info("Transforming data...")
+# try:
+#     data_transformation_pipeline = DataTransformationPipeline()
+#     data_transformation_pipeline.initiate_data_transformation()
+# except Exception as e:
+#     logger.error(f"Data transformation failed: {e}")
 
-# # Base model preparation
+# Base model preparation
 # logger.info("Preparing the base model...")
 # try:
 #     base_model_preparation_pipeline = BaseModelPreparationPipeline()
 #     base_model_preparation_pipeline.initiate_model_preparation()
 # except Exception as e:
 #     logger.error(f"Base model preparation failed: {e}")
+
+# Model training
+logger.info("Training the model...")
+try:
+    model_training_pipeline = ModelTrainingPipeline()
+    model_training_pipeline.initiate_model_training()
+except Exception as e:
+    logger.error(f"Model training failed: {e}")
+    raise e

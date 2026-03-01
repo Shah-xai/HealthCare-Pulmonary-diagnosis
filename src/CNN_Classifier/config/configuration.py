@@ -2,7 +2,10 @@ from pathlib import Path
 
 from CNN_Classifier.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from CNN_Classifier.utils.common import read_yaml,create_directories
-from CNN_Classifier.entity.config_entity import DataIngestionConfig, BaseModelConfig, DataTransformationConfig
+from CNN_Classifier.entity.config_entity import (DataIngestionConfig,
+                                                  BaseModelConfig, 
+                                                  DataTransformationConfig,
+                                                  ModelTrainingConfig)
 
 class ConfigurationManager:
     def __init__(self, config_file_path=CONFIG_FILE_PATH, params_file_path=PARAMS_FILE_PATH):
@@ -48,3 +51,25 @@ class ConfigurationManager:
             seed=params.SEED
         )
         return data_transformation_config
+    
+    def get_model_training_config(self)->ModelTrainingConfig:
+        config = self.config.model_training
+        params = self.params
+        create_directories([config.root_dir])
+        model_training_config = ModelTrainingConfig(
+            root_dir=config.root_dir,
+            training_data_dir=config.training_data_dir,
+            validation_data_dir=config.validation_data_dir,
+            updated_model_dir=config.updated_model_dir,
+            feature_extract_dir=config.feature_extract_dir,
+            trained_model_dir=config.trained_model_dir,
+            trained_model_dir_svm=config.trained_model_dir_svm,
+            trained_model_dir_pca_svm=config.trained_model_dir_pca_svm,
+            trained_model_dir_kpca_svm=config.trained_model_dir_kpca_svm,
+            SEED=params.SEED,
+            EPOCHS=params.EPOCHS,
+            PATIENCE=params.PATIENCE,
+            IMAGE_SIZE=tuple(params.TARGET_IMAGE_SIZE),
+            BATCH_SIZE=params.BATCH_SIZE
+        )
+        return model_training_config

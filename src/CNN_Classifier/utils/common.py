@@ -3,10 +3,10 @@ import os
 from box import ConfigBox
 from box.exceptions import BoxValueError
 from ensure import ensure_annotations
-from typing import Any
 import joblib, json
 import base64
 import zipfile
+from pathlib import Path
 
 # Define a function to read YAML files and return a ConfigBox object
 @ensure_annotations
@@ -35,61 +35,58 @@ def create_directories(path_to_directories: list[str]) -> None:
         os.makedirs(path, exist_ok=True)
 
 # Define a function to save a Python object as a JSON file
-@ensure_annotations
-def save_json(path: str, data: Any) -> None:
+def save_json(path:Path, data: object) -> None:
     """
     Saves a Python object as a JSON file.
 
     Args:
-        path (str): The file path where the JSON file will be saved.
-        data (Any): The Python object to be saved as JSON."""
+        path (Path): The file path where the JSON file will be saved.
+        data (object): The Python object to be saved as JSON."""
     with open(path, 'w') as json_file:
         json.dump(data, json_file, indent=4)
 # Define a function to load a Python object from a JSON file
-@ensure_annotations
-def load_json(path: str) -> Any:
+def load_json(path: Path) -> object:
     """
     Loads a Python object from a JSON file.
 
     Args:
-        path (str): The file path to the JSON file."""
+        path (Path): The file path to the JSON file."""
     with open(path, 'r') as json_file:
         return json.load(json_file)
 # Define a function to save a Python object using joblib
-@ensure_annotations
-def save_object(path: str, obj: Any) -> None:
+def save_object(path: Path, obj: object) -> None:
     """
     Saves a Python object using joblib.
 
     Args:
-        path (str): The file path where the object will be saved.
-        obj (Any): The Python object to be saved."""
+        path (Path): The file path where the object will be saved.
+        obj (object): The Python object to be saved."""
     joblib.dump(obj, path)
 # Define a function to load a Python object using joblib
 @ensure_annotations
-def load_object(path: str) -> Any:
+def load_object(path: Path) -> object:
     """
     Loads a Python object using joblib.
 
     Args:
-        path (str): The file path to the object file."""
+        path (Path): The file path to the object file."""
     return joblib.load(path)
 # Define a function to extract a zip file to a specified directory
 @ensure_annotations
-def extract_zip(file_path: str, dest_dir: str) -> None:
+def extract_zip(file_path: Path, dest_dir: Path) -> None:
     """
     Extracts a zip file to a specified directory.
 
     Args:
-        file_path (str): The file path to the zip file.
-        dest_dir (str): The directory where the contents of the zip file will be extracted."""
+        file_path (Path): The file path to the zip file.
+        dest_dir (Path): The directory where the contents of the zip file will be extracted."""
     
     with zipfile.ZipFile(file_path, 'r') as zip_ref:
         zip_ref.extractall(dest_dir)
 
 # Define a function to get the size of a file in KB
 @ensure_annotations
-def get_size(path: str) -> int:
+def get_size(path: Path) -> int:
     """
     Gets the size of a file in KB.
 

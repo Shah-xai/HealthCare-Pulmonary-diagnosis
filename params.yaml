@@ -4,8 +4,10 @@ weights: imagenet
 pooling: avg
 classes: 4
 classifier_activation: softmax
-EPOCHS: 20
-LEARNING_RATE: 0.001
+EPOCHS: 50
+PATIENCE: 5
+LEARNING_RATE: 0.01
 BATCH_SIZE: 32
 TARGET_IMAGE_SIZE: [224, 224]
+AUGMENTATION: True
 SEED: 42

@@ -12,3 +12,14 @@ base_model_preparation:
 data_transformation:
   raw_data_dir: artifacts/data_ingestion/raw_data/Data
   root_dir: artifacts/data_transformation
+
+model_training:
+  root_dir: artifacts/model_training
+  training_data_dir: artifacts\data_transformation\transformed_train 
+  validation_data_dir: artifacts\data_transformation\transformed_valid
+  updated_model_dir: artifacts/base_model/updated_model.keras
+  feature_extract_dir: artifacts/base_model/feature_extract_model.keras
+  trained_model_dir: artifacts/model_training/trained_model_tl.keras
+  trained_model_dir_svm: artifacts/model_training/trained_model_svm.joblib
+  trained_model_dir_pca_svm: artifacts/model_training/trained_model_pca_svm.joblib
+  trained_model_dir_kpca_svm: artifacts/model_training/trained_model_kpca_svm.joblib
