@@ -3,6 +3,7 @@ from CNN_Classifier.pipeline.data_ingestion_pipeline import DataIngestionPipelin
 from CNN_Classifier.pipeline.base_model_preparation_pipeline import BaseModelPreparationPipeline
 from CNN_Classifier.pipeline.data_transformation_pipeline import DataTransformationPipeline
 from CNN_Classifier.pipeline.model_training_pipeline import ModelTrainingPipeline
+from CNN_Classifier.pipeline.model_evaluation_pipeline import ModelEvaluationPipeline
 
 # logger.info("Starting the CNN Classifier application...")
 
@@ -30,10 +31,19 @@ from CNN_Classifier.pipeline.model_training_pipeline import ModelTrainingPipelin
 #     logger.error(f"Base model preparation failed: {e}")
 
 # Model training
-logger.info("Training the model...")
+# logger.info("Training the model...")
+# try:
+#     model_training_pipeline = ModelTrainingPipeline()
+#     model_training_pipeline.initiate_model_training()
+# except Exception as e:
+#     logger.error(f"Model training failed: {e}")
+#     raise e
+
+# Model evaluation
+logger.info("Evaluating the model...")  
 try:
-    model_training_pipeline = ModelTrainingPipeline()
-    model_training_pipeline.initiate_model_training()
+    
+    model_evaluation_pipeline = ModelEvaluationPipeline()
+    model_evaluation_pipeline.initiate_model_evaluation()
 except Exception as e:
-    logger.error(f"Model training failed: {e}")
-    raise e
+    logger.error(f"Model evaluation failed: {e}")

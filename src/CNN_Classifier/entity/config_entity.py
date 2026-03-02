@@ -44,3 +44,17 @@ class ModelTrainingConfig:
     PATIENCE: int
     IMAGE_SIZE: tuple
     BATCH_SIZE: int
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    root_dir: Path
+    test_data_dir: Path
+    trained_model_dir: Path
+    feature_extract_dir: Path
+    trained_model_dir_svm: Path
+    trained_model_dir_pca_svm: Path
+    trained_model_dir_kpca_svm: Path
+    mlflow_uri: str
+    IMAGE_SIZE: tuple
+    BATCH_SIZE: int
+    SEED: int

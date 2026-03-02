@@ -1,11 +1,14 @@
 from pathlib import Path
+import dotenv
+import os
 
 from CNN_Classifier.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from CNN_Classifier.utils.common import read_yaml,create_directories
 from CNN_Classifier.entity.config_entity import (DataIngestionConfig,
                                                   BaseModelConfig, 
                                                   DataTransformationConfig,
-                                                  ModelTrainingConfig)
+                                                  ModelTrainingConfig,
+                                                  EvaluationConfig)
 
 class ConfigurationManager:
     def __init__(self, config_file_path=CONFIG_FILE_PATH, params_file_path=PARAMS_FILE_PATH):
@@ -73,3 +76,26 @@ class ConfigurationManager:
             BATCH_SIZE=params.BATCH_SIZE
         )
         return model_training_config
+    
+    def get_model_evaluation_config(self)->EvaluationConfig:
+        config = self.config.model_evaluation
+        params = self.params
+        dotenv.load_dotenv()
+        MLflow_uri = os.getenv("MLFLOW_TRACKING_URI")
+
+        create_directories([config.root_dir])
+        model_evaluation_config = EvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_dir=config.data_dir,
+            trained_model_dir=config.trained_model_dir,
+            feature_extract_dir=config.feature_extract_dir,
+            trained_model_dir_svm=config.trained_model_dir_svm,
+            trained_model_dir_pca_svm=config.trained_model_dir_pca_svm,
+            trained_model_dir_kpca_svm=config.trained_model_dir_kpca_svm,
+            mlflow_uri=MLflow_uri,
+            IMAGE_SIZE=tuple(params.TARGET_IMAGE_SIZE),
+            BATCH_SIZE=params.BATCH_SIZE,
+            SEED=params.SEED,
+            
+        )
+        return model_evaluation_config

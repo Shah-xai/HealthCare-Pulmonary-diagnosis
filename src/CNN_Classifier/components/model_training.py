@@ -109,7 +109,8 @@ class ModelTraining:
         scaler = StandardScaler()
         cls_svm = SVC(kernel='rbf', random_state=self.config.SEED,
                                               class_weight='balanced',
-                                              decision_function_shape='ovr')
+                                              decision_function_shape='ovr'
+                                )
         pipe_svc = make_pipeline(scaler, cls_svm)
         pipe_svc.fit(x_train, y_train)
         metrics = self.report_f1(pipe_svc, x_train, y_train, x_val, y_val)
