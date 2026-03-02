@@ -1,3 +1,5 @@
+from mlflow.models import Model
+
 from CNN_Classifier import logger
 from CNN_Classifier.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from CNN_Classifier.pipeline.base_model_preparation_pipeline import BaseModelPreparationPipeline
@@ -5,39 +7,39 @@ from CNN_Classifier.pipeline.data_transformation_pipeline import DataTransformat
 from CNN_Classifier.pipeline.model_training_pipeline import ModelTrainingPipeline
 from CNN_Classifier.pipeline.model_evaluation_pipeline import ModelEvaluationPipeline
 
-# logger.info("Starting the CNN Classifier application...")
+logger.info("Starting the CNN Classifier application...")
 
-# # Data ingestion
-# logger.info("Ingesting data...")
-# try:
-#     data_ingestion_pipeline = DataIngestionPipeline()
-#     data_ingestion_pipeline.initiate_data_ingestion()
-# except Exception as e:
-#     logger.error(f"Data ingestion failed: {e}")
-# # Data transformation
-# logger.info("Transforming data...")
-# try:
-#     data_transformation_pipeline = DataTransformationPipeline()
-#     data_transformation_pipeline.initiate_data_transformation()
-# except Exception as e:
-#     logger.error(f"Data transformation failed: {e}")
+# Data ingestion
+logger.info("Ingesting data...")
+try:
+    data_ingestion_pipeline = DataIngestionPipeline()
+    data_ingestion_pipeline.initiate_data_ingestion()
+except Exception as e:
+    logger.error(f"Data ingestion failed: {e}")
+# Data transformation
+logger.info("Transforming data...")
+try:
+    data_transformation_pipeline = DataTransformationPipeline()
+    data_transformation_pipeline.initiate_data_transformation()
+except Exception as e:
+    logger.error(f"Data transformation failed: {e}")
 
-# Base model preparation
-# logger.info("Preparing the base model...")
-# try:
-#     base_model_preparation_pipeline = BaseModelPreparationPipeline()
-#     base_model_preparation_pipeline.initiate_model_preparation()
-# except Exception as e:
-#     logger.error(f"Base model preparation failed: {e}")
+#Base model preparation
+logger.info("Preparing the base model...")
+try:
+    base_model_preparation_pipeline = BaseModelPreparationPipeline()
+    base_model_preparation_pipeline.initiate_model_preparation()
+except Exception as e:
+    logger.error(f"Base model preparation failed: {e}")
 
 # Model training
-# logger.info("Training the model...")
-# try:
-#     model_training_pipeline = ModelTrainingPipeline()
-#     model_training_pipeline.initiate_model_training()
-# except Exception as e:
-#     logger.error(f"Model training failed: {e}")
-#     raise e
+logger.info("Training the model...")
+try:
+    model_training_pipeline = ModelTrainingPipeline()
+    model_training_pipeline.initiate_model_training()
+except Exception as e:
+    logger.error(f"Model training failed: {e}")
+    raise e
 
 # Model evaluation
 logger.info("Evaluating the model...")  

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from dataclasses import dataclass
 import joblib
 import numpy as np
+from seaborn import cm
 from sklearn.calibration import label_binarize
 from CNN_Classifier import logger
 from CNN_Classifier.entity.config_entity import EvaluationConfig
@@ -56,12 +57,19 @@ class ModelEvaluation:
                                        target_names=target_names,
                                          zero_division=0)
         cm = confusion_matrix(y_true, y_pred)
+
+        fig, ax = plt.subplots(figsize=(12, 8))  # wider figure
+
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=target_names)
-        disp.plot(values_format='d')
+        disp.plot(ax=ax, values_format='d', cmap="viridis", colorbar=True)
+
+        # Fix horizontal label mess
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
+
         plt.tight_layout()
         cm_path = Path(output_dir) / "confusion_matrix.png"
         plt.savefig(cm_path, dpi=300)
-        plt.close()
+        plt.close(fig)
         if y_score is not None:
             n_classes = y_score.shape[1]
             y_true_bin = label_binarize(y_true, classes=list(range(n_classes)))  # (N,C)
@@ -75,7 +83,7 @@ class ModelEvaluation:
             roc_auc = auc(fpr, tpr)
 
             plt.figure()
-            plt.plot(fpr, tpr, label=f"Micro-average ROC (AUC = {roc_auc:.3f})")
+            plt.plot(fpr, tpr, label=f"Micro-average ROC (AUC = {roc_auc:.2f})")
             plt.plot([0, 1], [0, 1], linestyle="--")
             plt.xlabel("False Positive Rate")
             plt.ylabel("True Positive Rate")
