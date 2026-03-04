@@ -11,3 +11,7 @@ class DataTransformationPipeline:
         logger.info("Starting data transformation....")
         data_transformation = DataTransformation(config=self.data_transformation_config)
         data_transformation.data_transformation()
+
+if __name__ == "__main__":
+    data_transformation_pipeline = DataTransformationPipeline()
+    data_transformation_pipeline.initiate_data_transformation()

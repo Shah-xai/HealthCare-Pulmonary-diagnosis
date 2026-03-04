@@ -10,3 +10,6 @@ class ModelEvaluationPipeline:
     def initiate_model_evaluation(self):
         logger.info("Initiating model evaluation...")
         self.model_evaluation.evaluate_model()
+if __name__ == "__main__":
+    model_evaluation_pipeline = ModelEvaluationPipeline()
+    model_evaluation_pipeline.initiate_model_evaluation()

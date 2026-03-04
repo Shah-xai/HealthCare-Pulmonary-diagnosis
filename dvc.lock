@@ -18,7 +18,7 @@ stages:
       size: 249913596
       nfiles: 2000
   data_transformation:
-    cmd: python src/CNN_Classifier/pipeline/data_transformation_pipeline.py
+    cmd: uv run  src/CNN_Classifier/pipeline/data_transformation_pipeline.py
     deps:
     - path: artifacts/data_ingestion/balanced
       hash: md5
@@ -31,5 +31,82 @@ stages:
       size: 1715
     - path: src/CNN_Classifier/pipeline/data_transformation_pipeline.py
       hash: md5
-      md5: 1ec50415ad6a65c76f307ed13dd740c0
-      size: 622
+      md5: 69fff182ca61d7cbadaa9879a1a9c137
+      size: 782
+    outs:
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: ca8fda5943dac31cc6aa992ef3171b9d.dir
+      size: 32424741
+      nfiles: 847
+  base_model_preparation:
+    cmd: uv run  src/CNN_Classifier/pipeline/base_model_preparation_pipeline.py
+    deps:
+    - path: config.yaml
+      hash: md5
+      md5: 61f36ed78bae1e23a59241240dab3466
+      size: 1715
+    - path: src/CNN_Classifier/pipeline/base_model_preparation_pipeline.py
+      hash: md5
+      md5: 1161c17d6096c46a083c2724513ce3b2
+      size: 973
+    outs:
+    - path: artifacts/base_model
+      hash: md5
+      md5: 301b9f34bd0f889f8387003318315974.dir
+      size: 85064702
+      nfiles: 3
+  model_training:
+    cmd: uv run  src/CNN_Classifier/pipeline/model_training_pipeline.py
+    deps:
+    - path: artifacts/base_model
+      hash: md5
+      md5: 301b9f34bd0f889f8387003318315974.dir
+      size: 85064702
+      nfiles: 3
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: ca8fda5943dac31cc6aa992ef3171b9d.dir
+      size: 32424741
+      nfiles: 847
+    - path: config.yaml
+      hash: md5
+      md5: 61f36ed78bae1e23a59241240dab3466
+      size: 1715
+    - path: src/CNN_Classifier/pipeline/model_training_pipeline.py
+      hash: md5
+      md5: 159d96df493566f3fbc764e19a4acc65
+      size: 834
+    outs:
+    - path: artifacts/model_training
+      hash: md5
+      md5: 1a9a91d311fa5e8e35ea7e75a7c438ce.dir
+      size: 47711320
+      nfiles: 8
+  model_evaluation:
+    cmd: uv run  src/CNN_Classifier/pipeline/model_evaluation_pipeline.py
+    deps:
+    - path: artifacts/data_transformation
+      hash: md5
+      md5: ca8fda5943dac31cc6aa992ef3171b9d.dir
+      size: 32424741
+      nfiles: 847
+    - path: artifacts/model_training
+      hash: md5
+      md5: 1a9a91d311fa5e8e35ea7e75a7c438ce.dir
+      size: 47711320
+      nfiles: 8
+    - path: config.yaml
+      hash: md5
+      md5: 61f36ed78bae1e23a59241240dab3466
+      size: 1715
+    - path: src/CNN_Classifier/pipeline/model_evaluation_pipeline.py
+      hash: md5
+      md5: b0aa1c1756d3a586bb1e5cb4b1e2d57a
+      size: 672
+    outs:
+    - path: artifacts/model_evaluation
+      hash: md5
+      md5: bf999bb5781a3e3aea62b7a8cd08da28.dir
+      size: 254878
+      nfiles: 2

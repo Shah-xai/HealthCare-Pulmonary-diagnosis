@@ -13,3 +13,7 @@ class ModelTrainingPipeline:
             logger.info("Model training pipeline completed successfully.")
         except Exception as e:
             logger.error(f"Model training pipeline failed: {e}")
+
+if __name__ == "__main__":
+    model_training_pipeline = ModelTrainingPipeline()
+    model_training_pipeline.initiate_model_training()

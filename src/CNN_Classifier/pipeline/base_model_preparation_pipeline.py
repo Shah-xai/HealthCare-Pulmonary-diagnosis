@@ -16,3 +16,7 @@ class BaseModelPreparationPipeline:
 
         # Step 3: Prepare the feature extractor for hybrid learning
         self.base_model_preparation.create_feature_extractor()
+    
+if __name__ == "__main__":
+    base_model_preparation_pipeline = BaseModelPreparationPipeline()
+    base_model_preparation_pipeline.initiate_model_preparation()

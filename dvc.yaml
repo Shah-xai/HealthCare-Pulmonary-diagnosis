@@ -19,19 +19,15 @@ stages:
     deps:
       - src/CNN_Classifier/pipeline/base_model_preparation_pipeline.py
       - config.yaml
-    params:
-      - params.yaml 
     outs:
-      - artifacts/base_model_preparation/base_model
+      - artifacts/base_model
   model_training:
     cmd: uv run  src/CNN_Classifier/pipeline/model_training_pipeline.py
     deps:
       - src/CNN_Classifier/pipeline/model_training_pipeline.py
       - config.yaml
       - artifacts/data_transformation
-      - artifacts/base_model_preparation/base_model 
-    params: 
-      - params.yaml
+      - artifacts/base_model
     outs:
       - artifacts/model_training
   model_evaluation:
@@ -41,7 +37,5 @@ stages:
       - config.yaml
       - artifacts/model_training
       - artifacts/data_transformation
-    params:
-      - params.yaml
     outs:
       - artifacts/model_evaluation
