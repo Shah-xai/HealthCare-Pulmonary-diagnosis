@@ -1,0 +1,47 @@
+stages:
+  data_ingestion:
+    cmd: python src/CNN_Classifier/data_ingestion_pipeline.py
+    deps:
+      - src/CNN_Classifier/data_ingestion_pipeline.py
+      - config.yaml
+    outs:
+      - artifacts/data_ingestion/data_ingestion
+  data_transformation:
+    cmd: python src/CNN_Classifier/data_transformation_pipeline.py
+    deps:
+      - src/CNN_Classifier/data_transformation_pipeline.py
+      - config.yaml
+      - artifacts/data_ingestion/balanced # Assuming the output of data ingestion is used as input for data transformation
+    outs:
+      - artifacts/data_transformation/data_transformation
+  base_model_preparation:
+    cmd: python src/CNN_Classifier/base_model_preparation_pipeline.py
+    deps:
+      - src/CNN_Classifier/base_model_preparation_pipeline.py
+      - config.yaml
+    params:
+      - params.yaml 
+    outs:
+      - artifacts/base_model_preparation/base_model
+  model_training:
+    cmd: python src/CNN_Classifier/model_training_pipeline.py
+    deps:
+      - src/CNN_Classifier/model_training_pipeline.py
+      - config.yaml
+      - artifacts/data_transformation/data_transformation 
+      - artifacts/base_model_preparation/base_model 
+    params: 
+      - params.yaml
+    outs:
+      - artifacts/model_training
+  model_evaluation:
+    cmd: python src/CNN_Classifier/model_evaluation_pipeline.py
+    deps:
+      - src/CNN_Classifier/model_evaluation_pipeline.py
+      - config.yaml
+      - artifacts/model_training/model_training
+      - artifacts/data_transformation
+    params:
+      - params.yaml
+    outs:
+      - artifacts/model_evaluation

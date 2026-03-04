@@ -1,5 +1,5 @@
 include_top: False
-input_shape: [224, 224, 3] # musth have size in RESNET50
+input_shape: [224, 224, 3] # musth have size in EFFICIENTNET_B1
 weights: imagenet
 pooling: avg
 classes: 4

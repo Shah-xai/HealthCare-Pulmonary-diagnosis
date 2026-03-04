@@ -91,6 +91,7 @@ class ModelTraining:
     def train_model(self):
         #Transfer Learning
         train_ds, val_ds = self._input_preparation_for_CNN()
+        save_json(Path(self.config.root_dir) / "class_names.json", train_ds.class_names) # Save the class indices for future predicitons
         model = tf.keras.models.load_model(self.config.updated_model_dir)
         model.fit(train_ds, validation_data=val_ds,
                    epochs=self.config.EPOCHS,

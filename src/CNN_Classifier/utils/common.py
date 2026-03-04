@@ -94,7 +94,6 @@ def get_size(path: Path) -> int:
         path (str): The file path to the file."""
     return os.path.getsize(path)/1024
 # Define a function to encode an image to a Base64 string at the UI terminal
-@ensure_annotations
 def encodeImageToBase64(image_path: str) -> str:
     """
     Encodes an image to a Base64 string.
