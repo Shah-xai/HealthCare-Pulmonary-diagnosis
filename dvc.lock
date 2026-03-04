@@ -1,0 +1,35 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: uv run  src/CNN_Classifier/pipeline/data_ingestion_pipeline.py
+    deps:
+    - path: config.yaml
+      hash: md5
+      md5: 61f36ed78bae1e23a59241240dab3466
+      size: 1715
+    - path: src/CNN_Classifier/pipeline/data_ingestion_pipeline.py
+      hash: md5
+      md5: 737ad89e5ee40a7cc0eec20e0c4976b0
+      size: 793
+    outs:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: 782db35bb251c26dfa20d7506c38c69f.dir
+      size: 249913596
+      nfiles: 2000
+  data_transformation:
+    cmd: python src/CNN_Classifier/pipeline/data_transformation_pipeline.py
+    deps:
+    - path: artifacts/data_ingestion/balanced
+      hash: md5
+      md5: c022365f70d0df8f755c1681dc80bd87.dir
+      size: 86989062
+      nfiles: 847
+    - path: config.yaml
+      hash: md5
+      md5: 61f36ed78bae1e23a59241240dab3466
+      size: 1715
+    - path: src/CNN_Classifier/pipeline/data_transformation_pipeline.py
+      hash: md5
+      md5: 1ec50415ad6a65c76f307ed13dd740c0
+      size: 622

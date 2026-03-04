@@ -87,11 +87,14 @@ class ModelTraining:
             "val_f1_macro": round(val_f1_macro,3),
             "overfitting_gap": round(abs(train_f1_macro - val_f1_macro),3),
         }
+    @staticmethod
+    def get_class_names(dir_path:Path)->list[str]:
+        class_names = sorted([item.name for item in dir_path.iterdir() if item.is_dir()])
+        return class_names
 
     def train_model(self):
         #Transfer Learning
         train_ds, val_ds = self._input_preparation_for_CNN()
-        save_json(Path(self.config.root_dir) / "class_names.json", train_ds.class_names) # Save the class indices for future predicitons
         model = tf.keras.models.load_model(self.config.updated_model_dir)
         model.fit(train_ds, validation_data=val_ds,
                    epochs=self.config.EPOCHS,
@@ -139,6 +142,10 @@ class ModelTraining:
         save_json(Path(self.config.root_dir) / "kpca_svc_metrics.json", metrics_kpca_svc)
         save_object( self.config.trained_model_dir_kpca_svm, pipe_kpca_svc)
         logger.info(f"Kernel PCA + SVM model saved at {self.config.trained_model_dir_kpca_svm}")
+
+        # at the end of the training, get class names for future use in inference
+        class_names = self.get_class_names(Path(self.config.training_data_dir))
+        save_json(Path(self.config.root_dir) / "class_names.json", class_names)
 
 
 

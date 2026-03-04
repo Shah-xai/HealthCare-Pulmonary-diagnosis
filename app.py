@@ -1,6 +1,6 @@
 from flask import request, jsonify,Flask, render_template
 from flask_cors import CORS, cross_origin
-from shortuuid import uuid
+import uuid
 from CNN_Classifier.utils.common import decodeBase64ToImage
 from CNN_Classifier.pipeline.prediction import PredictionPipeline
 
@@ -23,8 +23,11 @@ def predictRoute():
     image = request.json['image']
     file_name = f"Image_{uuid.uuid4().hex}.jpg"
     decodeBase64ToImage(image, file_name)
-    result = ClientApp().classifier.predict(file_name)
-    return jsonify(result)
+    result = clApp.classifier.predict(file_name)
+    return jsonify({
+        "predicted_class": result["predicted_class"],
+        "confidence_pct": round(float(result["confidence"]) * 100, 2),
+    })
 
 
 
