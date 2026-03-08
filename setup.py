@@ -11,6 +11,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Shah-xai/HealthCare-Pulmonary-diagnosis",
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
+    include_package_data=True,
 )
-package_dir={"":"src"}
-setuptools.find_packages(where="src")
+
