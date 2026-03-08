@@ -180,7 +180,7 @@ class ModelEvaluation:
             mlflow.log_metric("recall", round(recall, 3))
             mlflow.log_dict(report, artifact_file=f"{model_name}_classification_report.json")
             mlflow.log_artifact(str(cm_path))
-    def evaluate_model(self):
+    def evaluate_model(self, log_model: bool = True):
         # Load model
         cnn_model = self._load_keras_model(self.config.trained_model_dir)
         svm_model = self._load_sklearn_model(self.config.trained_model_dir_svm)
@@ -198,9 +198,12 @@ class ModelEvaluation:
                                                            feature_extractor,
                                                              self.config.BATCH_SIZE,
                                                              self.config.SEED)
-        # Evaluate and log results
-        self._model_logger(cnn_model, "CNN", test_data_cnn.X, test_data_cnn.y, test_data_cnn.target_names)
-        self._model_logger(svm_model, "SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
-        self._model_logger(pca_svm_model, "PCA_SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
-        self._model_logger(kpca_svm_model, "KPCA_SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
-        logger.info("Model evaluation completed and logged into MLflow.")
+        
+
+        # Evaluate and Log results
+        if log_model:
+            self._model_logger(cnn_model, "CNN", test_data_cnn.X, test_data_cnn.y, test_data_cnn.target_names)
+            self._model_logger(svm_model, "SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
+            self._model_logger(pca_svm_model, "PCA_SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
+            self._model_logger(kpca_svm_model, "KPCA_SVM", test_data_ml.X, test_data_ml.y, test_data_ml.target_names)
+        logger.info("Model Successfully logged into MLflow.")
