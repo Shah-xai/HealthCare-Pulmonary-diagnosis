@@ -12,9 +12,9 @@ from pathlib import Path
 
 class PredictionPipeline:
     def __init__(self):
-        self.config = read_yaml("config.yaml")["model_training"]
-        self.model_path = Path(self.config["trained_model_dir_kpca_svm"])
-        self.feature_extractor_path = Path(self.config["feature_extract_dir"])
+        self.config = read_yaml("config.yaml")["model_deployment"]
+        self.model_path = Path(self.config.model_dir)
+        self.feature_extractor_path = Path(self.config.feature_extractor_dir)
         label_path = Path(self.config["root_dir"]) / "class_names.json"
         with open(label_path, "r") as f:
             self.class_names = json.load(f)

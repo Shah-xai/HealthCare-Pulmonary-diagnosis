@@ -30,3 +30,9 @@ model_evaluation:
   trained_model_dir_svm: artifacts/model_training/trained_model_svm.joblib
   trained_model_dir_pca_svm: artifacts/model_training/trained_model_pca_svm.joblib
   trained_model_dir_kpca_svm: artifacts/model_training/trained_model_kpca_svm.joblib
+
+model_deployment:
+  root_dir: deployment_artifacts
+  model_dir: deployment_artifacts/trained_model_kpca_svm.joblib
+  feature_extractor_dir: deployment_artifacts/feature_extract_model.keras
+
