@@ -1,5 +1,3 @@
-from xml.parsers.expat import model
-
 from CNN_Classifier import logger
 from CNN_Classifier.entity.config_entity import ModelTrainingConfig
 import tensorflow as tf

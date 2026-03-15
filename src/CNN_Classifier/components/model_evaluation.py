@@ -1,10 +1,6 @@
-import os
-
-from dotenv import load_dotenv
 from dataclasses import dataclass
 import joblib
 import numpy as np
-from seaborn import cm
 from sklearn.calibration import label_binarize
 from CNN_Classifier import logger
 from CNN_Classifier.entity.config_entity import EvaluationConfig
@@ -16,8 +12,6 @@ from sklearn.metrics import (auc, classification_report,
                              confusion_matrix,ConfusionMatrixDisplay,
                                roc_curve, roc_auc_score, 
                                f1_score, precision_score, recall_score)
-from sklearn.preprocessing import label_binarize
-from urllib.parse import urlparse
 from pathlib import Path
 import tensorflow as tf
 from tensorflow.keras.applications.efficientnet import preprocess_input
@@ -169,7 +163,7 @@ class ModelEvaluation:
             mlflow.log_param("model_name", model_name)
             try:
                 mlflow.keras.log_model(model, artifact_path=model_name)
-            except Exception as e:
+            except Exception:
                 mlflow.sklearn.log_model(model, artifact_path=model_name)
             if roc_score_ is not None:
                 mlflow.log_metric("roc_auc_score", round(roc_score_, 3))
