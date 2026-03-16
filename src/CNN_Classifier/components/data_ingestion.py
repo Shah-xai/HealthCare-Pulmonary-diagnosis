@@ -9,8 +9,6 @@ import hashlib
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
-from PIL import Image
-import numpy as np
 
 
 class DataIngestion:

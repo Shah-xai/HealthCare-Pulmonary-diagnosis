@@ -3,7 +3,8 @@ import os
 from box import ConfigBox
 from box.exceptions import BoxValueError
 from ensure import ensure_annotations
-import joblib, json
+import joblib
+import json
 import base64
 import zipfile
 from pathlib import Path

@@ -1,4 +1,3 @@
-from CNN_Classifier import logger
 from CNN_Classifier.config.configuration import ConfigurationManager
 from CNN_Classifier.components.base_model_preparation import BaseModelPreparation
 
