@@ -100,9 +100,9 @@ jobs:
         run: |
          docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.REPOSITORY_NAME }}:latest
          
-      # - name: Stop and remove container if running
-      #   run: |
-      #    docker ps -aq --filter "name=^cnncls$" | grep -q .  && docker rm -f cnncls || true
+      - name: Stop and remove container if running
+        run: |
+         docker ps -aq --filter "name=^cnncls$" | grep -q .  && docker rm -f cnncls || true
        
       - name: Run Docker Image to serve users
         run: |
