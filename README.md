@@ -4,8 +4,7 @@
 ---
 
 ## 🧩 System Architecture
-
-> Architecture.png
+![System Architecture](./Architecture.png)
 
 ---
 
