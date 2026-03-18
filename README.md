@@ -14,7 +14,7 @@
 
 > This demo showcases the end-to-end system running on **AWS EC2**, enabling real-time inference from CT scan images.
 > 
->[![Chest X-Ray Image Classification Demo](Video_cover.png)](https://youtu.be/V-8DRsfcHa8)
+>[![Chest X-Ray Image Classification Demo](video_cover.png)](https://youtu.be/V-8DRsfcHa8)
 
 ### 🔍 What’s demonstrated:
 - Upload CT scan image  
