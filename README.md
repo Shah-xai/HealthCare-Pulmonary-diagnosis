@@ -5,7 +5,7 @@
 
 ## 🧩 System Architecture
 
-> 🔧 Add your architecture diagram here (high priority for credibility)
+> Architecture.png
 
 ---
 
