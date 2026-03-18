@@ -18,7 +18,7 @@
 
 ## 🚀 Overview
 
-This project implements a **production-grade deep learning pipeline** for pulmonary disease classification from CT scan images.
+This project implements a **production-grade hybrid ML+DL pipeline** for pulmonary disease classification from CT scan images.
 
 The system achieves **>96% Macro F1-score** on the evaluation dataset, demonstrating strong balanced classification performance across multiple pulmonary conditions.
 
@@ -108,3 +108,18 @@ dvc pull
 dvc repro
 python app.py
 http://localhost:5000
+
+## 📚 Reference
+
+This project is inspired by the following research work:
+
+- *“A hybrid deep learning and machine learning approach for lung cancer classification using CT images,”*  
+  **Expert Systems with Applications**, 2023.  
+  https://www.sciencedirect.com/science/article/pii/S0957417423004633  
+
+Key contributions adopted in this project:
+
+- Use of **CNN-based feature extraction from CT images**
+- Integration of **dimensionality reduction techniques (e.g., PCA)**
+- Application of **classical ML classifiers (e.g., SVM)** on deep features
+- Demonstration of improved classification performance using hybrid pipelines :contentReference[oaicite:0]{index=0}
