@@ -8,9 +8,20 @@
 
 ---
 
-## 🎥 Demo
+## 🎥 Demo — Cloud-Deployed Inference
 
----
+🎬 **From CT Scan to Diagnosis in Seconds — Cloud-Deployed AI Pipeline**
+
+> This demo showcases the end-to-end system running on **AWS EC2**, enabling real-time inference from CT scan images.
+> [![Watch the demo](https://img.youtube.com/vi/V-8DRsfcHa8/maxresdefault.jpg)](https://youtu.be/V-8DRsfcHa8)
+
+### 🔍 What’s demonstrated:
+- Upload CT scan image  
+- Automated preprocessing & feature extraction  
+- Real-time prediction using trained model  
+- Display of classification results  
+
+🌐 **Live system runs on cloud infrastructure**, simulating a production-ready deployment scenario.
 
 
 ---
