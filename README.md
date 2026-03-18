@@ -108,7 +108,7 @@ dvc pull
 dvc repro
 python app.py
 http://localhost:5000
-
+```
 ## 📚 Reference
 
 This project is inspired by the following research work:
