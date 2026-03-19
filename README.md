@@ -100,8 +100,8 @@ Unlike typical academic implementations, this project incorporates a **full MLOp
 >
 > Reported performance (**F1 > 96%**) is measured on a held-out test dataset.
 > To ensure validity:
-> - Data is split into **train/test sets with no overlap**
-> - Evaluation is performed on **unseen test data only**
+> - Data is split into **train/validation/test sets with no overlap**
+> - Reported model performance is on **unseen test data only**
 >
 > ⚠️ Medical imaging models are sensitive to data leakage and dataset bias. 
 > Further validation (e.g., patient-level split, cross-dataset evaluation) is recommended for clinical generalization.
